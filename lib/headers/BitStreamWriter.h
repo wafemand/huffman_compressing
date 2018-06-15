@@ -27,7 +27,7 @@ namespace huffman {
     }
 
 
-    class BitFileWriter {
+    class BitStreamWriter {
         static const size_t BYTE = 8;
         static const size_t BUF_CAP = 1024 * 1;
 
@@ -51,7 +51,7 @@ namespace huffman {
         }
 
     public:
-        explicit BitFileWriter(std::ostream &stream)
+        explicit BitStreamWriter(std::ostream &stream)
                 : output_stream(stream), buf(new Byte[BUF_CAP]) {
             output_stream.exceptions(std::ostream::badbit);
             std::fill(buf, buf + BUF_CAP, 0);
@@ -99,9 +99,9 @@ namespace huffman {
             output_stream.write(char_buf, buf_pos);           // but .read need char*
             std::fill(buf, buf + BUF_CAP, 0);
             buf_pos = 0;
-8        }
+        }
 
-        ~BitFileWriter() {
+        ~BitStreamWriter() {
             flush();
             output_stream.flush();
             delete[] buf;

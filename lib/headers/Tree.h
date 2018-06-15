@@ -19,20 +19,19 @@ namespace huffman {
     public:
         static const size_t WORD_SIZE = 8;
         static const size_t WORD_NUMBER = 1u << WORD_SIZE;
-        typedef unsigned char Word;
 
         void swap(Tree &other);
 
     private:
         struct Node {
-            Word word = 0;
+            Byte word = 0;
 
             Node *sons[2] = {nullptr, nullptr};
 
             /* Node *left = nullptr;
              Node *right = nullptr;*/
 
-            Node(Word wrd) : word(wrd) {}
+            Node(Byte wrd) : word(wrd) {}
 
             Node(Node *left, Node *right) {
                 sons[0] = left;
@@ -65,13 +64,13 @@ namespace huffman {
 
         void dfs(Node *cur, BitCode code);
 
-        void dfs_compress(Node *cur, std::vector<bool> &path, std::vector<uint8_t> &used_codes);
+        void dfs_compress(Node *cur, std::vector<bool> &path, std::vector<Byte> &used_codes);
 
         void dfs_decompress(Node *cur,
                             size_t &pos_in_path,
                             size_t &pos_in_used,
                             std::vector<bool> const &path,
-                            std::vector<uint8_t> const &used_codes);
+                            std::vector<Byte> const &used_codes);
 
         void build_tree(std::vector<size_t> const &counts);
 
@@ -93,9 +92,9 @@ namespace huffman {
             return current_node->sons[0] == nullptr;
         }
 
-        Word get_word() {
+        Byte get_word() {
             assert(is_list());
-            Word res = current_node->word;
+            Byte res = current_node->word;
             current_node = root;
             return res;
         }
@@ -108,9 +107,9 @@ namespace huffman {
             return codes[word];
         }
 
-        void compress_tree(std::vector<bool> &path, std::vector<uint8_t> &used_codes);
+        void compress_tree(std::vector<bool> &path, std::vector<Byte> &used_codes);
 
-        void decompress_tree(const std::vector<bool> &path, const std::vector<uint8_t> &used_codes);
+        void decompress_tree(const std::vector<bool> &path, const std::vector<Byte> &used_codes);
     };
 }
 

@@ -12,9 +12,6 @@ using namespace std;
 using namespace huffman;
 
 
-typedef Tree::Word word;
-
-
 void throw_if(bool cond) {
     if (cond) {
         throw damaged_file();
@@ -47,7 +44,7 @@ void Tree::build_tree(std::vector<size_t> const &counts) {
             CountedNodeComparator> pq;
     for (size_t cur_word = 0; cur_word < WORD_NUMBER; ++cur_word) {
         if (counts[cur_word] > 0) {
-            pq.emplace(new Node(static_cast<Word>(cur_word)), counts[cur_word]);
+            pq.emplace(new Node(static_cast<Byte>(cur_word)), counts[cur_word]);
         }
     }
     while (pq.size() > 1) {
@@ -68,14 +65,14 @@ void Tree::build_tree(std::vector<size_t> const &counts) {
 }
 
 
-void Tree::compress_tree(std::vector<bool> &path, std::vector<uint8_t> &used_codes) {
+void Tree::compress_tree(std::vector<bool> &path, std::vector<Byte> &used_codes) {
     if (root != nullptr) {
         dfs_compress(root, path, used_codes);
     }
 }
 
 
-void Tree::dfs_compress(Tree::Node *cur, std::vector<bool> &path, std::vector<uint8_t> &used_codes) {
+void Tree::dfs_compress(Tree::Node *cur, std::vector<bool> &path, std::vector<Byte> &used_codes) {
     if (cur->sons[0] != nullptr) {
         assert(cur->sons[1] != nullptr);
         path.push_back(false);
@@ -89,7 +86,7 @@ void Tree::dfs_compress(Tree::Node *cur, std::vector<bool> &path, std::vector<ui
 }
 
 
-void Tree::decompress_tree(std::vector<bool> const &path, std::vector<uint8_t> const &used_codes) {
+void Tree::decompress_tree(std::vector<bool> const &path, std::vector<Byte> const &used_codes) {
     if (path.empty()) {
         current_node = root = nullptr;
         return;
@@ -108,7 +105,7 @@ void Tree::dfs_decompress(Tree::Node *cur,
                           size_t &pos_in_path,
                           size_t &pos_in_used,
                           std::vector<bool> const &path,
-                          std::vector<uint8_t> const &used_codes) {
+                          std::vector<Byte> const &used_codes) {
     if (!path[pos_in_path]) {
         for (int i : {0, 1}) {
             cur->sons[i] = new Node(0);
@@ -120,7 +117,7 @@ void Tree::dfs_decompress(Tree::Node *cur,
         }
     } else {
         throw_if(pos_in_used >= used_codes.size());
-        cur->word = Word(used_codes[pos_in_used++]);
+        cur->word = Byte(used_codes[pos_in_used++]);
     }
     throw_if(pos_in_path >= path.size());
     throw_if(!path[pos_in_path]);

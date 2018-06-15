@@ -10,15 +10,15 @@ include_directories(headers)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --std=c++17 -O3 -g")
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -D_GLIBCXX_DEBUG -D_DEBUG -g -O0 -fno-omit-frame-pointer -fsanitize=address,undefined")
-set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -g -O3 -fsanitize=address,undefined")
+set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -g -O3")
 
 add_library(huffman STATIC
         headers/huffman.h
         src/Tree.cpp
         headers/Tree.h
-        headers/BitFileWriter.h
+        headers/BitStreamWriter.h
         headers/BitCode.h
-        headers/BitFileReader.h
+        headers/BitStreamReader.h
         headers/exceptions.h
         src/huffman.cpp
         headers/Stat.h)

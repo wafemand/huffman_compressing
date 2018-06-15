@@ -13,7 +13,7 @@
 namespace huffman {
 
 
-    class BitFileReader {
+    class BitStreamReader {
         static const size_t BYTE = 8;
         static const size_t BUF_CAP = 1024 * 1;
 
@@ -45,7 +45,7 @@ namespace huffman {
         }
 
     public:
-        explicit BitFileReader(std::istream &stream)
+        explicit BitStreamReader(std::istream &stream)
                 : input_stream(stream), buf(new Byte[BUF_CAP]) {
             input_stream.exceptions(std::istream::badbit);
             update_buf();
@@ -95,7 +95,7 @@ namespace huffman {
             return buf_pos == buf_end;
         }
 
-        ~BitFileReader() {
+        ~BitStreamReader() {
             delete[] buf;
         }
     };

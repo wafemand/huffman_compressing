@@ -4,8 +4,8 @@
 #include <memory>
 #include <iostream>
 #include "../headers/huffman.h"
-#include "../headers/BitFileReader.h"
-#include "../headers/BitFileWriter.h"
+#include "lib/headers/BitStreamReader.h"
+#include "lib/headers/BitStreamWriter.h"
 #include "../headers/Tree.h"
 
 
@@ -14,7 +14,7 @@ namespace huffman {
     const size_t ALPHABET_SIZE = 1ull << WORD_SIZE;
 
 
-    void write_compressed_tree(Tree &tree, BitFileWriter &writer) {
+    void write_compressed_tree(Tree &tree, BitStreamWriter &writer) {
         Stat &stat = Stat::instance();
         std::vector<bool> path;
         std::vector<Byte> used_codes;
@@ -41,8 +41,8 @@ namespace huffman {
         Stat &stat = Stat::instance();
         auto timer = clock();
         auto start = input_stream.tellg();
-        BitFileReader reader(input_stream);
-        BitFileWriter writer(output_stream);
+        BitStreamReader reader(input_stream);
+        BitStreamWriter writer(output_stream);
         std::vector<size_t> counts(ALPHABET_SIZE);
         size_t message_size = 0;
 
@@ -59,7 +59,7 @@ namespace huffman {
         writer.set_bit_mode(true);
         input_stream.clear();
         input_stream.seekg(start);
-        BitFileReader reader2(input_stream);
+        BitStreamReader reader2(input_stream);
         while (!reader2.eof()) {
             writer.write(tree.get_bit_code(reader2.read_byte()));
         }
@@ -74,7 +74,7 @@ namespace huffman {
     }
 
 
-    void read_header(BitFileReader &reader, std::vector<bool> &path, std::vector<Byte> &used_codes) {
+    void read_header(BitStreamReader &reader, std::vector<bool> &path, std::vector<Byte> &used_codes) {
         Stat &stat = Stat::instance();
         reader.set_bit_mode(false);
         size_t tree_size = reader.read_int<uint16_t>();
@@ -94,8 +94,8 @@ namespace huffman {
     void decompress(std::istream &input_stream, std::ostream &output_stream) {
         Stat &stat = Stat::instance();
         auto timer = clock();
-        BitFileReader reader(input_stream);
-        BitFileWriter writer(output_stream);
+        BitStreamReader reader(input_stream);
+        BitStreamWriter writer(output_stream);
         std::vector<bool> path;
         std::vector<Byte> used_codes;
 
@@ -127,43 +127,3 @@ namespace huffman {
         stat.speed = stat.original_bytes / stat.time;
     }
 }
-
-
-/*
-0000
-0001
-001
-01
-1
-0001
-0000
-001
-0000
-0001
-0000
-001
-0000
-0001
-0000
-001
-0000
-0001
-0000
-0000
-1
-1
-1
-1
-1
-01
-01
-1
-1
-1
-1
-01
-01
-1
-1
-1
-*/
