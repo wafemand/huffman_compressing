@@ -31,14 +31,14 @@ template<class Worker>
 void do_(Worker worker, int argc, const char **argv) {
     if (argc == 2) {
         worker(cin, cout);
-    } else if (argc != 4) {
-        throw invalid_argument_exception();
-    } else {
+    } else if (argc == 4) {
         ifstream input(argv[2], std::ifstream::binary);
         input.exceptions(ifstream::failbit);
         ofstream output(argv[3], std::ofstream::binary);
         output.exceptions(ofstream::failbit);
         worker(input, output);
+    } else {
+        throw invalid_argument_exception();
     }
 }
 

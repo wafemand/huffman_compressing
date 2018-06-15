@@ -22,8 +22,8 @@ namespace huffman {
         auto tree_size = static_cast<uint16_t>(path.size());
         auto used_alphabet_size = static_cast<uint16_t>(used_codes.size());
         writer.set_bit_mode(false);
-        writer.writeInt(tree_size);
-        writer.writeInt(used_alphabet_size);
+        writer.write_int(tree_size);
+        writer.write_int(used_alphabet_size);
         writer.set_bit_mode(true);
         for (bool bit : path) {
             writer.write_bit(bit);
@@ -55,7 +55,7 @@ namespace huffman {
         Tree tree(counts);
 
         write_compressed_tree(tree, writer);
-        writer.writeInt(message_size);
+        writer.write_int(message_size);
         writer.set_bit_mode(true);
         input_stream.clear();
         input_stream.seekg(start);

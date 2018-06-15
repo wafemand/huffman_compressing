@@ -72,7 +72,7 @@ namespace huffman {
         }
 
         template<typename T>
-        void writeInt(T val) { // use only in normal mode, else UB
+        void write_int(T val) { // use only in normal mode, else UB
             for (int i = 0; i < sizeof(T); ++i) {
                 write_byte(val >> (i * BYTE));
             }

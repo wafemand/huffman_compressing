@@ -28,9 +28,6 @@ namespace huffman {
 
             Node *sons[2] = {nullptr, nullptr};
 
-            /* Node *left = nullptr;
-             Node *right = nullptr;*/
-
             Node(Byte wrd) : word(wrd) {}
 
             Node(Node *left, Node *right) {
