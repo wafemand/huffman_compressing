@@ -13,20 +13,6 @@
 
 namespace huffman {
 
-
-    inline std::string to2(Byte a){
-        std::string res ;
-        while (a > 0){
-            res.push_back('0' + (a & 1));
-            a /= 2;
-        }
-        while (res.size() < 8){
-            res.push_back('0');
-        }
-        return res;
-    }
-
-
     class BitStreamWriter {
         static const size_t BYTE = 8;
         static const size_t BUF_CAP = 1024 * 1;
