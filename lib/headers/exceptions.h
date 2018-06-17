@@ -1,9 +1,7 @@
 //
 // Created by andrey on 11.06.18.
 //
-
-#ifndef HUFFMAN_COMPRESSION_EXCEPTIONS_H
-#define HUFFMAN_COMPRESSION_EXCEPTIONS_H
+#pragma once
 
 #include <string>
 #include <exception>
@@ -22,5 +20,3 @@ namespace huffman {
         }
     };
 }
-
-#endif //HUFFMAN_COMPRESSION_EXCEPTIONS_H

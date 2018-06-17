@@ -1,10 +1,7 @@
 //
 // Created by andrey on 08.06.18.
 //
-
-#ifndef HUFFMAN_COMPRESSION_TREE_H
-#define HUFFMAN_COMPRESSION_TREE_H
-
+#pragma once
 
 #include <glob.h>
 #include <cstdint>
@@ -109,5 +106,3 @@ namespace huffman {
         void decompress_tree(const std::vector<bool> &path, const std::vector<Byte> &used_codes);
     };
 }
-
-#endif //HUFFMAN_COMPRESSION_TREE_H

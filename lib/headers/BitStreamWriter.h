@@ -1,9 +1,7 @@
 //
 // Created by andrey on 09.06.18.
 //
-
-#ifndef HUFFMAN_COMPRESSION_BIT_WRITER_H
-#define HUFFMAN_COMPRESSION_BIT_WRITER_H
+#pragma once
 
 #include <cstddef>
 #include <ostream>
@@ -108,6 +106,3 @@ namespace huffman {
         }
     };
 }
-
-
-#endif //HUFFMAN_COMPRESSION_BIT_WRITER_H

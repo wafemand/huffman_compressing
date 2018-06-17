@@ -1,10 +1,7 @@
 //
 // Created by andrey on 09.06.18.
 //
-
-#ifndef HUFFMAN_COMPRESSION_BITCODE_H
-#define HUFFMAN_COMPRESSION_BITCODE_H
-
+#pragma once
 
 #include <stdint-gcc.h>
 #include <glob.h>
@@ -43,5 +40,3 @@ namespace huffman {
         }
     };
 }
-
-#endif //HUFFMAN_COMPRESSION_BITCODE_H

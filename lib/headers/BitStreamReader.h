@@ -1,9 +1,7 @@
 //
 // Created by andrey on 09.06.18.
 //
-
-#ifndef HUFFMAN_COMPRESSION_BITFILEREADER_H
-#define HUFFMAN_COMPRESSION_BITFILEREADER_H
+#pragma once
 
 #include <cstddef>
 #include <istream>
@@ -102,4 +100,3 @@ namespace huffman {
     };
 
 }
-#endif //HUFFMAN_COMPRESSION_BITFILEREADER_H

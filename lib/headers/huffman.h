@@ -1,9 +1,7 @@
 //
 // Created by andrey on 07.06.18.
 //
-
-#ifndef HUFFMAN_COMPRESSION_HUFFMAN_H
-#define HUFFMAN_COMPRESSION_HUFFMAN_H
+#pragma once
 
 #include <string>
 #include "Stat.h"
@@ -18,4 +16,3 @@ namespace huffman {
 
     void decompress(std::istream &input_stream, std::ostream &output_stream);
 }
-#endif //HUFFMAN_COMPRESSION_HUFFMAN_H

@@ -1,9 +1,7 @@
 //
 // Created by andrey on 12.06.18.
 //
-
-#ifndef HUFFMAN_COMPRESSION_STATISTIC_H
-#define HUFFMAN_COMPRESSION_STATISTIC_H
+#pragma once
 
 #include <ostream>
 #include <string>
@@ -50,5 +48,3 @@ namespace huffman {
         }
     };
 }
-
-#endif //HUFFMAN_COMPRESSION_STATISTIC_H
