@@ -59,7 +59,7 @@ namespace huffman {
         Node *current_node = nullptr;
         std::vector<BitCode> codes;
 
-        void dfs(Node *cur, BitCode code);
+        void dfs(Node *cur, BitCode code = BitCode());
 
         void dfs_compress(Node *cur, std::vector<bool> &path, std::vector<Byte> &used_codes);
 

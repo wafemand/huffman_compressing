@@ -24,13 +24,11 @@ void Tree::dfs(Node *cur, BitCode code) {
 
         assert(cur->sons[1] != nullptr);
 
-        code.push_back(false);
-        dfs(cur->sons[0], code);
-        code.pop_back();
-
-        code.push_back(true);
-        dfs(cur->sons[1], code);
-        code.pop_back();
+        for (auto i: {0, 1}) {
+            code.push_back(i);
+            dfs(cur->sons[i], code);
+            code.pop_back();
+        }
     } else {
         codes[cur->word] = code;
     }
@@ -50,14 +48,17 @@ void Tree::build_tree(std::vector<size_t> const &counts) {
     while (pq.size() > 1) {
         CountedNode first = pq.top();
         pq.pop();
+
         CountedNode second = pq.top();
         pq.pop();
+
         pq.emplace(new Node(first.node, second.node), first.count + second.count);
     }
+
     if (!pq.empty()) {
         root = pq.top().node;
         codes.resize(WORD_NUMBER);
-        dfs(root, BitCode());
+        dfs(root);
     } else {
         root = nullptr;
     }
@@ -75,8 +76,10 @@ void Tree::compress_tree(std::vector<bool> &path, std::vector<Byte> &used_codes)
 void Tree::dfs_compress(Tree::Node *cur, std::vector<bool> &path, std::vector<Byte> &used_codes) {
     if (cur->sons[0] != nullptr) {
         assert(cur->sons[1] != nullptr);
+
         path.push_back(false);
         dfs_compress(cur->sons[0], path, used_codes);
+
         path.push_back(false);
         dfs_compress(cur->sons[1], path, used_codes);
     } else {
@@ -97,7 +100,7 @@ void Tree::decompress_tree(std::vector<bool> const &path, std::vector<Byte> cons
 
     dfs_decompress(root, pos_in_path, pos_in_used, path, used_codes);
     codes.resize(WORD_NUMBER);
-    dfs(root, BitCode());
+    dfs(root);
 }
 
 
