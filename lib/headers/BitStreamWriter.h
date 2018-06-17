@@ -15,7 +15,7 @@ namespace huffman {
 
     class BitStreamWriter {
         static const size_t BYTE = 8;
-        static const size_t BUF_CAP = 1024 * 1;
+        static const size_t BUF_CAP = 1024 * 128;
 
         size_t total_byte_count = 0;
         std::ostream &output_stream;
