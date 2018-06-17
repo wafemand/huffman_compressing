@@ -12,8 +12,7 @@ using namespace std;
 using namespace huffman;
 
 
-// про тесты я тебе так расскажу
-void string_compress_decompress(const string &st){
+std::string string_compress_decompress(const string &st){
     stringstream in(st);
     stringstream compressed;
     stringstream decompressed;
@@ -24,7 +23,7 @@ void string_compress_decompress(const string &st){
 
     decompress(compressed, decompressed);
 
-    EXPECT_EQ(in.str(), decompressed.str());
+    return decompressed.str();
 }
 
 
@@ -33,7 +32,7 @@ TEST(correctness, big_random) {
     for (int i = 0; i < 100000000; i++){
         random.push_back(rand());
     }
-    string_compress_decompress(random);
+    EXPECT_EQ(random, string_compress_decompress(random));
 }
 
 
@@ -42,12 +41,12 @@ TEST(correctness, big_null){
     for (int i = 0; i < 100000000; i++){
         null.push_back(rand());
     }
-    string_compress_decompress(null);
+    EXPECT_EQ(null, string_compress_decompress(null));
 }
 
 
 TEST(correctness, empty){
-    string_compress_decompress("");
+    EXPECT_EQ("", string_compress_decompress(""));
 }
 
 
