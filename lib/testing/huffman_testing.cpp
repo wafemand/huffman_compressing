@@ -12,6 +12,7 @@ using namespace std;
 using namespace huffman;
 
 
+// про тесты я тебе так расскажу
 void string_compress_decompress(const string &st){
     stringstream in(st);
     stringstream compressed;

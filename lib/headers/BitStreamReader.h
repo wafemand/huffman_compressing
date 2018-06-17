@@ -46,6 +46,7 @@ namespace huffman {
 
     public:
         explicit BitStreamReader(std::istream &stream)
+        // не выделяй руками память, используй unique_ptr, shared_ptr, std::array, std::vector
                 : input_stream(stream), buf(new Byte[BUF_CAP]) {
             input_stream.exceptions(std::istream::badbit);
             update_buf();
