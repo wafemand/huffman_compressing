@@ -17,12 +17,12 @@ struct invalid_argument_exception : exception {
 
 void print_help() {
     cerr << "Usage:\n"
-            "  with file names:"
+            "  with file names:\n"
             "    huffman_utility [compress|decompress] <input file> <output file>\n"
-            "  or with stdin/stdout"
-            "    huffman_utility [compress|decompress]"
-            "Examples:"
-            "  huffman_utility compress file.txt file.compressed"
+            "  or with stdin/stdout\n"
+            "    huffman_utility [compress|decompress]\n"
+            "Examples:\n"
+            "  huffman_utility compress file.txt file.compressed\n"
             "  huffman_utility decompress <file.compressed >/dev/null" << endl;
 }
 
